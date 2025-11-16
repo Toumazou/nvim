@@ -51,6 +51,8 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
 
+vim.opt.clipboard = "unnamedplus"
+
 
 -------------------------------------------------
 -- Set up bindings before loading lazy.nvim so that mappings are correct
@@ -62,15 +64,23 @@ vim.keymap.set("i","jj","<Esc>", {noremap = true})
 -- J joins the current and next line, and below key map keeps your cursor in place
 vim.keymap.set("n", "J", "mzJ`z")
 
-
+-- Execution bindings TJ is using 
+vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>")
+vim.keymap.set("n", "<space>x", ":.lua<CR>")
+vim.keymap.set("v", "<space>x", ":lua<CR>")
+print("hey YT")
 
 -------------------------------------------------
 -- Setup lazy.nvim by giving plugins
 -------------------------------------------------
-require("lazy").setup("plugins")
 
-
--------------------------------------------------
+require("lazy").setup({
+	spec = {
+		{ import = "plugins" },
+		{ import = "plugins.lsp" }
+	},
+})
+--------------------------------------------
 -- Work in progress
 -------------------------------------------------
 
